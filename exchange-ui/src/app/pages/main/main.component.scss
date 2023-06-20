@@ -1,0 +1,37 @@
+main{
+  display: grid;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  top: 20%;
+}
+
+mat-form-field{
+  width: 400px;
+}
+
+.fi{
+  margin-right: 7px;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: thin;
+  border-color: gray;
+}
+
+label{
+  display: flex;
+  padding-bottom: 8px;
+  font-size: larger;
+}
+
+.converter{
+  font-size: large;
+}
+
+.bold{
+  font-weight: bolder;
+}
+
+.form_box{
+  display: flex;
+}

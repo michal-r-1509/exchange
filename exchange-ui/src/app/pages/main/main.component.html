@@ -1,0 +1,47 @@
+<main>
+  <form>
+    <label>You send</label>
+    <div class="form_box">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" id="some" placeholder="type value"
+               (change)="convert_1_value()" [formControl]="value_1_control">
+        <span matTextPrefix class="fi {{flag_1}}"></span>
+        <span matTextSuffix>
+          <mat-select placeholder="select"
+                      (selectionChange)="setView(); convert(true)" [formControl]="option_1_control">
+            <mat-option *ngFor="let currency of currencies" [value]="currency">
+              {{currency}}
+            </mat-option>
+          </mat-select>
+        </span>
+        <mat-error *ngIf="value_1_control.hasError('required')">Type some value</mat-error>
+        <mat-error *ngIf="value_1_control.hasError('pattern')">Invalid pattern</mat-error>
+        <mat-error *ngIf="option_1_control.hasError('required')">Choose currency</mat-error>
+      </mat-form-field>
+
+    </div>
+    <label>They receive</label>
+    <div class="form_box">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" placeholder="type value"
+               (change)="convert_2_value()" [formControl]="value_2_control">
+        <span matTextPrefix class="fi {{flag_2}}"></span>
+        <span matTextSuffix>
+          <mat-select placeholder="select"
+                      (selectionChange)="setView(); convert(false)" [formControl]="option_2_control">
+            <mat-option *ngFor="let currency of currencies" [value]="currency">
+              {{currency}}
+            </mat-option>
+          </mat-select>
+        </span>
+        <mat-error *ngIf="value_1_control.hasError('required')">Type some value</mat-error>
+        <mat-error *ngIf="value_1_control.hasError('pattern')">Invalid pattern</mat-error>
+        <mat-error *ngIf="option_2_control.hasError('required')">Choose currency</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <div *ngIf="exchangeRate != ''">
+    <span class="converter">1 {{toConvertCurrency}} = </span>
+    <span class="converter bold">{{exchangeRate}} {{convertedCurrency}}</span>
+  </div>
+</main>
