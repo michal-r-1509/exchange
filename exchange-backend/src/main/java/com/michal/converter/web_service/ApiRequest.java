@@ -17,7 +17,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class ApiRequest {
-    @Value("${webapi.request-url}")
+    @Value("${webapi.currency-request-url}")
     private String url;
 
     private final RestTemplate restTemplate;

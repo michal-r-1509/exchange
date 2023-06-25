@@ -1,6 +1,7 @@
 package com.michal.converter.config;
 
 import com.michal.converter.service.ConverterService;
+import com.michal.converter.service.NotUpdatedServiceImpl;
 import com.michal.converter.service.NotScheduledServiceImpl;
 import com.michal.converter.service.ScheduledServiceImpl;
 import lombok.Getter;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "cache")
 public class CacheConfig {
     private Scheduling schedulingMethod;
+    private TableClearing cacheTable;
     private int updateIntervalInSeconds;
     private int clearIntervalInSeconds;
     private int clearDelayInSeconds;
@@ -39,8 +41,21 @@ public class CacheConfig {
         return new ScheduledServiceImpl();
     }
 
+    @Bean
+    @ConditionalOnProperty(prefix = "cache", name = "scheduling-method", havingValue = "not_updated")
+    public ConverterService lastRateService() {
+        log.info("Application runs in LAST RATE mode");
+        return new NotUpdatedServiceImpl();
+    }
+
     public enum Scheduling {
         SCHEDULED,
-        NOT_SCHEDULED
+        NOT_SCHEDULED,
+        NOT_UPDATED
+    }
+
+    public enum TableClearing{
+        UPDATE,
+        PURGE
     }
 }

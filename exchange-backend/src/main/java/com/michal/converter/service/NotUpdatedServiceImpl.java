@@ -7,8 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class NotScheduledServiceImpl implements ConverterService, ApplicationContextAware {
-
+public class NotUpdatedServiceImpl implements ConverterService, ApplicationContextAware {
     private CurrencyWebService currencyWebService;
     private RateConverter converter;
 
@@ -18,7 +17,7 @@ public class NotScheduledServiceImpl implements ConverterService, ApplicationCon
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        currencyWebService = applicationContext.getBean("webServiceNotScheduled", CurrencyWebService.class);
+        currencyWebService = applicationContext.getBean("notUpdatedCacheService", CurrencyWebService.class);
         converter = applicationContext.getBean(RateConverter.class);
     }
 }

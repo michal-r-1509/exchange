@@ -9,8 +9,8 @@
         <span matTextSuffix>
           <mat-select placeholder="select"
                       (selectionChange)="setView(); convert(true)" [formControl]="option_1_control">
-            <mat-option *ngFor="let currency of currencies" [value]="currency">
-              {{currency}}
+            <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+              {{currency.code}} ({{currency.country}})
             </mat-option>
           </mat-select>
         </span>
@@ -29,8 +29,8 @@
         <span matTextSuffix>
           <mat-select placeholder="select"
                       (selectionChange)="setView(); convert(false)" [formControl]="option_2_control">
-            <mat-option *ngFor="let currency of currencies" [value]="currency">
-              {{currency}}
+            <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+              {{currency.code}} ({{currency.country}})
             </mat-option>
           </mat-select>
         </span>

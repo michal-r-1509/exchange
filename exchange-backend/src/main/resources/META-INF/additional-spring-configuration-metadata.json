@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "name": "cache"
+    },
+    {
+      "name": "webapi"
+    }
+  ],
+  "properties": [
+    {
+      "name": "cache.scheduling-method",
+      "description": "Interval of currency cache table updates."
+    },
+    {
+      "name": "cache.cache-table",
+      "description": "Table of cached values clearing method."
+    },
+    {
+      "name": "cache.update-interval-in-seconds",
+      "description": "Cache table updates interval (default=30s)."
+    },
+    {
+      "name": "cache.clear-interval-in-seconds",
+      "description": "Cache table clear interval (default=179s)."
+    },
+    {
+      "name": "cache.clear-delay-in-seconds",
+      "description": "Cache table first clear delay (default=179s)."
+    },
+    {
+      "name": "webapi.currency-request-url",
+      "description": "URL of currency exchange API."
+    },
+    {
+      "name": "webapi.basic-currency",
+      "description": "Basic currency code (default=pln)."
+    }
+  ],
+  "hints": [
+    {
+      "name": "cache.scheduling-method",
+      "values": [
+        {
+          "value": "scheduled",
+          "description": "Creates cache table, currency rates are updated in time intervals (default)."
+        },
+        {
+          "value": "not_scheduled",
+          "description": "Application gets new rate in every request."
+        },
+        {
+          "value": "not_updated",
+          "description": "Application gets rate once and not update it (highly not recommended)."
+        }
+      ]
+    },
+    {
+      "name": "cache.cache-table",
+      "values": [
+        {
+          "value": "update",
+          "description": "Constantly updates cache table entities."
+        },
+        {
+          "value": "purge",
+          "description": "Clears cache table entities in time intervals (default)."
+        }
+      ]
+    }
+  ]
+}

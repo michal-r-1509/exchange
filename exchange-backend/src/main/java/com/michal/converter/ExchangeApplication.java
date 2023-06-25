@@ -1,7 +1,5 @@
 package com.michal.converter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
@@ -36,10 +34,4 @@ public class ExchangeApplication {
 	public CacheManager cacheManager() {
 		return new ConcurrentMapCacheManager("rates");
 	}
-
-/*	@Bean
-	public ObjectMapper objectMapper(){
-		return new ObjectMapper();
-	}*/
-
 }

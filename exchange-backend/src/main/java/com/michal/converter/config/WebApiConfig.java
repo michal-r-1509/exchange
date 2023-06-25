@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "webapi")
 public class WebApiConfig {
-    private String requestUrl;
+    private String currencyRequestUrl;
     private String basicCurrency;
 }

@@ -2,7 +2,10 @@ package com.michal.converter.web_service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +54,6 @@ public class ScheduledWebServiceImpl implements CurrencyWebService {
         }
     }
 
-    @CacheEvict(value = "rates", allEntries = true)
     @Scheduled(fixedRateString = "${cache.update-interval-in-seconds:30}", timeUnit = TimeUnit.SECONDS)
     public void updateCurrencyRate() {
         if (currency == null || rates.isEmpty()) {
@@ -64,14 +66,19 @@ public class ScheduledWebServiceImpl implements CurrencyWebService {
         });
     }
 
-    @Scheduled(fixedRateString = "${cache.clear-interval-in-seconds:179}",
-            initialDelayString = "${cache.clear-delay-in-seconds:179}", timeUnit = TimeUnit.SECONDS)
-    public void clearTable() {
-        if (this.rates.isEmpty() && this.currency == null) {
-            return;
+    @Configuration
+    @ConditionalOnProperty(prefix = "cache", name = "cache-table", havingValue = "purge", matchIfMissing = true)
+    class TableCache{
+        @Scheduled(fixedRateString = "${cache.clear-interval-in-seconds:179}",
+                initialDelayString = "${cache.clear-delay-in-seconds:179}", timeUnit = TimeUnit.SECONDS)
+        public void clearTable() {
+            if (ScheduledWebServiceImpl.this.rates.isEmpty() && ScheduledWebServiceImpl.this.currency == null) {
+                return;
+            }
+            ScheduledWebServiceImpl.this.rates.clear();
+            ScheduledWebServiceImpl.this.currency = null;
+            log.info("CACHE TABLE CLEARED");
         }
-        this.rates.clear();
-        this.currency = null;
-        log.info("TABLE CLEARED");
+
     }
 }

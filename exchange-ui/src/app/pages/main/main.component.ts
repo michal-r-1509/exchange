@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ConverterService} from "../../service/converter.service";
 import {RequestDto} from "../dto/requestDto";
 import {Currency} from "../../shared/currencies";
+import {CurrencyEntity} from "../../shared/currencyEntity";
 
 @Component({
   selector: 'app-main',
@@ -11,10 +12,9 @@ import {Currency} from "../../shared/currencies";
 })
 export class MainComponent implements OnInit {
 
-  currenciesMap: Map<string, string>;
   flag_1?: string;
   flag_2?: string;
-  currencies: string[];
+  currencies: CurrencyEntity[];
   currency_1: string;
   currency_2: string;
   toConvertCurrency: string;
@@ -44,10 +44,9 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currenciesMap = this.currency.getCurrencies();
-    this.currencies = Array.from(this.currenciesMap.keys());
-    this.currency_1 = this.currencies[0];
-    this.currency_2 = this.currencies[1];
+    this.currencies = this.currency.getCurrencyInfo();
+    this.currency_1 = this.currency.getInitialCurrency(0);
+    this.currency_2 = this.currency.getInitialCurrency(1);
     this.setViewHelpers();
   }
 
@@ -60,8 +59,8 @@ export class MainComponent implements OnInit {
   setViewHelpers(): void{
     this.option_1_control.setValue(this.currency_1);
     this.option_2_control.setValue(this.currency_2);
-    this.flag_1 = this.currenciesMap.get(this.currency_1);
-    this.flag_2 = this.currenciesMap.get(this.currency_2);
+    this.flag_1 = this.currency.getFlag(this.currency_1);
+    this.flag_2 = this.currency.getFlag(this.currency_2);
   }
 
   convert(state: boolean): void {
