@@ -1,21 +1,6 @@
 import {Injectable} from "@angular/core";
 import {CurrencyEntity} from "./currencyEntity";
 
-/*export const currencies: any[] = [
-  {name: "PLN", flag: "fi-pl"},
-  {name: "GBP", flag: "fi-gb"},
-  {name: "EUR", flag: "fi-eu"},
-  {name: "USD", flag: "fi-us"},
-  {name: "THB", flag: "fi-th"},
-  {name: "AUD", flag: "fi-au"},
-  {name: "CAD", flag: "fi-ca"},
-  {name: "HUF", flag: "fi-hu"},
-  {name: "CHF", flag: "fi-ch"},
-  {name: "JPY", flag: "fi-jp"},
-  {name: "CLP", flag: "fi-cl"},
-  {name: "INR", flag: "fi-in"}
-]*/
-
 const currencies: Array<CurrencyEntity> = Array.of(
   {code: "PLN", country: "Poland", flag: "fi-pl"},
   {code: "GBP", country: "Great Britain", flag: "fi-gb"},
@@ -48,10 +33,4 @@ export class Currency {
     const currency = currencies.find(currency => currency.code == code);
     return currency?.flag ?? "";
   }
-
-  getCountry(code: string): string {
-    const currency = currencies.find(currency => currency.code == code);
-    return currency?.country ?? "";
-  }
-
 }

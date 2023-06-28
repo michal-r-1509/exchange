@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
-            log.error(MethodArgumentNotValidException.class + " \'" + fieldName + "\' " + errorMessage);
+            log.error(MethodArgumentNotValidException.class + " '" + fieldName + "' " + errorMessage);
             errors.put(fieldName, errorMessage);
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);

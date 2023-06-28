@@ -1,5 +1,16 @@
 ## EXCHANGE CONVERTER APPLICATION
 
+### OPIS
+Aplikacja umożliwiająca 
+łatwe i szybkie przeliczanie wartości między różnymi walutami. 
+Jej dodatkowym celem jest dostarczenie wskazówek, w jakich regionach 
+można się daną walutą posługiwać.
+
+### DESCRIPTION
+Application that let easy and quick conversion of values between
+different currencies.
+In additional, it provides tips as to where currency can be used.
+
 ### WYMAGANIA / REQUIREMENTS
 
 - Node.js 18.13.0
@@ -113,6 +124,8 @@ places.
 ![CPM - screenshot](screenshots/ui_2_example.png)
 
 ![CPM - screenshot](screenshots/ui_3_example.png)
+
+![CPM - screenshot](screenshots/ui_4_example.png)
 
 
 

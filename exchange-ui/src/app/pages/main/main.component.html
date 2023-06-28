@@ -3,10 +3,10 @@
     <label>You send</label>
     <div class="form_box">
       <mat-form-field appearance="outline">
-        <input matInput type="text" id="some" placeholder="type value"
+        <input matInput type="text" id="some" placeholder="Type value"
                (change)="convert_1_value()" [formControl]="value_1_control">
-        <span matTextPrefix class="fi {{flag_1}}"></span>
-        <span matTextSuffix>
+        <span matTextPrefix="" class="fi {{flag_1}}"></span>
+        <span matTextSuffix="">
           <mat-select placeholder="select"
                       (selectionChange)="setView(); convert(true)" [formControl]="option_1_control">
             <mat-option *ngFor="let currency of currencies" [value]="currency.code">
@@ -23,10 +23,10 @@
     <label>They receive</label>
     <div class="form_box">
       <mat-form-field appearance="outline">
-        <input matInput type="text" placeholder="type value"
+        <input matInput type="text" placeholder="Type value"
                (change)="convert_2_value()" [formControl]="value_2_control">
-        <span matTextPrefix class="fi {{flag_2}}"></span>
-        <span matTextSuffix>
+        <span matTextPrefix="" class="fi {{flag_2}}"></span>
+        <span matTextSuffix="">
           <mat-select placeholder="select"
                       (selectionChange)="setView(); convert(false)" [formControl]="option_2_control">
             <mat-option *ngFor="let currency of currencies" [value]="currency.code">
@@ -41,8 +41,11 @@
     </div>
   </form>
   <div>
-    <span class="converter">{{toConvertDisplay}}</span>
+    <span class="converter">{{toConvertDisplay}} </span>
     <span class="converter bold">{{exchangeRate}} {{convertedCurrency}}&nbsp;</span>
   </div>
   <app-info [currency_1] = "currency_1" [currency_2] = "currency_2" *ngIf="exchangeRate != ''"></app-info>
 </main>
+<footer>
+  Michał Raducki, GitHub: michal-r-1509, 2023
+</footer>

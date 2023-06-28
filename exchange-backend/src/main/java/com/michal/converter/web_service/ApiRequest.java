@@ -46,7 +46,6 @@ public class ApiRequest {
         return rate.getMid();
     }
 
-
     public List<CurrencyInfoDto> currencyInfoApiRequest(String code){
         ResponseEntity<CurrencyInfoDto[]> infoTable;
         List<CurrencyInfoDto> infoList = new ArrayList<>();

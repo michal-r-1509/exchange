@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Slf4j
 @Configuration
-//If don't use @Configuration in the POJO,
+//If we don't use @Configuration in the POJO,
 // then need to add @EnableConfigurationProperties(CacheProperties.class) in the main Spring application class
 @ConfigurationProperties(prefix = "cache")
 public class CacheConfig {

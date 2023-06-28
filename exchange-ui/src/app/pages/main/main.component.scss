@@ -22,3 +22,11 @@ mat-form-field{
 .form_box{
   display: flex;
 }
+
+footer{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  font-size: small;
+}

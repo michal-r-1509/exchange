@@ -9,11 +9,11 @@ import {InfoRequestDto} from "../dto/infoRequestDto";
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnChanges {
-  isLoaded: boolean = false;
 
   @Input() currency_1: string = '';
   @Input() currency_2: string = '';
 
+  isLoaded: boolean = false;
   dataSet: Array<InfoResponseDto> = new Array<InfoResponseDto>();
 
   constructor(private service: ConverterService) {
@@ -28,7 +28,6 @@ export class InfoComponent implements OnChanges {
     }
     this.dataSet.length = 0;
     for (const currency of currencies) {
-      console.log(currency)
       const infoRequest_1: InfoRequestDto = {code: currency};
       this.service.getCurrencyInfo(infoRequest_1).pipe().subscribe({
         next: response => {

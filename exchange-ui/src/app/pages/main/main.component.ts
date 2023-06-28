@@ -4,7 +4,6 @@ import {ConverterService} from "../../service/converter.service";
 import {RequestDto} from "../dto/requestDto";
 import {Currency} from "../../shared/currencies";
 import {CurrencyEntity} from "../../shared/currencyEntity";
-import {InfoComponent} from "../info/info.component";
 
 @Component({
   selector: 'app-main',
@@ -90,9 +89,7 @@ export class MainComponent implements OnInit {
     this.converterService.convertSingleValue(data).pipe().subscribe({
       next: response => {
         this.value_2_control.setValue(response.result);
-        this.toConvertDisplay = "1 " + this.currency_1 + " =";
-        this.convertedCurrency = this.currency_2;
-        this.exchangeRate = response.exchangeRate;
+        this.responseHandler(this.currency_1, this.currency_2, response.exchangeRate);
       },
       error: () => console.log("something gone wrong")
     });
@@ -115,13 +112,17 @@ export class MainComponent implements OnInit {
 
     this.converterService.convertSingleValue(data).pipe().subscribe({
       next: response => {
-        this.value_1_control.setValue(response.result)
-        this.toConvertDisplay = "1 " + this.currency_2 + " = ";
-        this.convertedCurrency = this.currency_1;
-        this.exchangeRate = response.exchangeRate;
+        this.value_1_control.setValue(response.result);
+        this.responseHandler(this.currency_2, this.currency_1, response.exchangeRate);
       },
       error: () => console.log("something gone wrong")
     });
+  }
+
+  responseHandler(currency_a: string, currency_b: string, rate: string){
+    this.toConvertDisplay = "1 " + currency_a + " =";
+    this.convertedCurrency = currency_b;
+    this.exchangeRate = rate;
   }
 
   dataPreparation(input: string, output: string, value: string): RequestDto{

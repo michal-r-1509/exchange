@@ -1,6 +1,6 @@
 <div *ngIf="!isLoaded">Data is loading...</div>
 <div *ngIf="isLoaded">
-  <div class="info_box"  *ngFor="let data of dataSet">
+  <div class="info_box" *ngFor="let data of dataSet">
     <div>
       <p>Where you can use {{data.code}}:</p>
       <p>{{data.name.common}} ({{data.name.official}})</p>
