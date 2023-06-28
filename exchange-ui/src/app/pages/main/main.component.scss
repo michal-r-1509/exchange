@@ -1,11 +1,3 @@
-main{
-  display: grid;
-  justify-content: center;
-  vertical-align: middle;
-  position: relative;
-  top: 20%;
-}
-
 mat-form-field{
   width: 400px;
 }
@@ -18,13 +10,8 @@ mat-form-field{
   border-color: gray;
 }
 
-label{
-  display: flex;
-  padding-bottom: 8px;
-  font-size: larger;
-}
-
 .converter{
+  min-height: 30px;
   font-size: large;
 }
 

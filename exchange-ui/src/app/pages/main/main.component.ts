@@ -4,6 +4,7 @@ import {ConverterService} from "../../service/converter.service";
 import {RequestDto} from "../dto/requestDto";
 import {Currency} from "../../shared/currencies";
 import {CurrencyEntity} from "../../shared/currencyEntity";
+import {InfoComponent} from "../info/info.component";
 
 @Component({
   selector: 'app-main',
@@ -17,9 +18,9 @@ export class MainComponent implements OnInit {
   currencies: CurrencyEntity[];
   currency_1: string;
   currency_2: string;
-  toConvertCurrency: string;
+  toConvertDisplay: string;
   convertedCurrency: string;
-  exchangeRate: string = "";
+  exchangeRate: string = '';
   inputFlag: boolean;
   pattern: string = "^\\d{1,9}([\\.\\,]\\d{1,2})?$";
 
@@ -89,7 +90,7 @@ export class MainComponent implements OnInit {
     this.converterService.convertSingleValue(data).pipe().subscribe({
       next: response => {
         this.value_2_control.setValue(response.result);
-        this.toConvertCurrency = this.currency_1;
+        this.toConvertDisplay = "1 " + this.currency_1 + " =";
         this.convertedCurrency = this.currency_2;
         this.exchangeRate = response.exchangeRate;
       },
@@ -115,7 +116,7 @@ export class MainComponent implements OnInit {
     this.converterService.convertSingleValue(data).pipe().subscribe({
       next: response => {
         this.value_1_control.setValue(response.result)
-        this.toConvertCurrency = this.currency_2;
+        this.toConvertDisplay = "1 " + this.currency_2 + " = ";
         this.convertedCurrency = this.currency_1;
         this.exchangeRate = response.exchangeRate;
       },

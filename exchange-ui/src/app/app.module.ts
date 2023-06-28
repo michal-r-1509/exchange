@@ -10,11 +10,13 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSelectModule} from "@angular/material/select";
+import {InfoComponent} from './pages/info/info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    InfoComponent
   ],
     imports: [
         BrowserModule,

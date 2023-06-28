@@ -1,0 +1,20 @@
+.info_box{
+  display: flex;
+  justify-content: space-between;
+  background-color: aliceblue;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  max-width: 380px;
+}
+
+.image_box{
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 5%;
+}
+
+img{
+  width: 100px;
+}

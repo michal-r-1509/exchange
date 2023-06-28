@@ -29,6 +29,10 @@
       "description": "Cache table first clear delay (default=179s)."
     },
     {
+      "name": "webapi.currency-info-url",
+      "description": "URL of currency info API."
+    },
+    {
       "name": "webapi.currency-request-url",
       "description": "URL of currency exchange API."
     },

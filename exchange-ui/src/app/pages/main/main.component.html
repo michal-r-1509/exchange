@@ -40,8 +40,9 @@
       </mat-form-field>
     </div>
   </form>
-  <div *ngIf="exchangeRate != ''">
-    <span class="converter">1 {{toConvertCurrency}} = </span>
-    <span class="converter bold">{{exchangeRate}} {{convertedCurrency}}</span>
+  <div>
+    <span class="converter">{{toConvertDisplay}}</span>
+    <span class="converter bold">{{exchangeRate}} {{convertedCurrency}}&nbsp;</span>
   </div>
+  <app-info [currency_1] = "currency_1" [currency_2] = "currency_2" *ngIf="exchangeRate != ''"></app-info>
 </main>
