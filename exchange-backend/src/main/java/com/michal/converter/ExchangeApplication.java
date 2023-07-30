@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableCaching
@@ -23,11 +22,6 @@ public class ExchangeApplication {
 	@Bean
 	public Validator validator(){
 		return new LocalValidatorFactoryBean();
-	}
-
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
 	}
 
 	@Bean

@@ -10,7 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,26 +21,33 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> elementNotFound(HttpMessageNotReadableException ex){
-        log.error(HttpMessageNotReadableException.class + " " + ex.getMessage());
+    public ResponseEntity<String> incorrectInputData(HttpMessageNotReadableException ex) {
+        log.error(HttpMessageNotReadableException.class + ": " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad data format");
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    public ResponseEntity<String> elementNotFound(HttpClientErrorException ex){
-        log.error(HttpClientErrorException.class + " " + ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");
-    }
-
-    @ExceptionHandler(DataNotFoundException.class)
-    public ResponseEntity<String> elementNotFound(DataNotFoundException ex){
-        log.error(DataNotFoundException.class + " " + ex.getMessage());
+    @ExceptionHandler(ApiNotFoundException.class)
+    public ResponseEntity<String> apiNotFound(ApiNotFoundException ex) {
+        log.error(ApiNotFoundException.class + ": " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<String> dataNotFound(DataNotFoundException ex) {
+        log.error(DataNotFoundException.class + ": " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ResourceAccessException.class)
+    public ResponseEntity<String> apiNotSecure(ResourceAccessException ex) {
+        log.error(ResourceAccessException.class + ": " + ex.getMessage() + "\n" + ex.getRootCause());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body("API not secure. " + ex.getMostSpecificCause().getMessage());
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> elementNotFound(IllegalArgumentException ex){
-        log.error(IllegalArgumentException.class + " " + ex.getMessage());
+    public ResponseEntity<String> illegalArgument(IllegalArgumentException ex) {
+        log.error(IllegalArgumentException.class + ": " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 

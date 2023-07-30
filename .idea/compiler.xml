@@ -7,22 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="exchange-converter" />
         <module name="exchange-ui" />
         <module name="exchange-backend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="exchange-backend" target="17" />
-      <module name="exchange-converter" target="17" />
       <module name="exchange-converter-app" target="17" />
-      <module name="exchange-ui" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="exchange-backend" options="-parameters" />
-      <module name="exchange-converter" options="-parameters" />
+      <module name="exchange-converter" options="" />
       <module name="exchange-ui" options="-parameters" />
     </option>
   </component>

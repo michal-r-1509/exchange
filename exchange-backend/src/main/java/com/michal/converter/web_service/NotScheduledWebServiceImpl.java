@@ -8,24 +8,15 @@ import java.math.BigDecimal;
 
 @Slf4j
 @RequiredArgsConstructor
-@Service("webServiceNotScheduled")
+@Service("notScheduledWebService")
 public class NotScheduledWebServiceImpl implements CurrencyWebService {
 
     private final ApiRequest apiRequest;
 
     @Override
-    public BigDecimal getCurrencyRate(String currency) {
-        BigDecimal result = apiRequest.apiRequest(currency);
+    public BigDecimal getExchangeRate(String currency) {
+        BigDecimal result = apiRequest.exchangeRateApiRequest(currency);
         log.info("got exchange rate " + currency + " " + result);
         return result;
-    }
-
-    @Override
-    public BigDecimal getRate(String currency) {
-        return null;
-    }
-
-    @Override
-    public void setCurrency(String currency) {
     }
 }

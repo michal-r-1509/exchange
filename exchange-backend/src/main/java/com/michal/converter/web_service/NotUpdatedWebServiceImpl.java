@@ -9,25 +9,16 @@ import java.math.BigDecimal;
 
 @Slf4j
 @RequiredArgsConstructor
-@Service("notUpdatedCacheService")
+@Service("notUpdatedCacheWebService")
 public class NotUpdatedWebServiceImpl implements CurrencyWebService {
 
     private final ApiRequest apiRequest;
 
     @Override
     @Cacheable(value = "rates")
-    public BigDecimal getCurrencyRate(String currency) {
-        BigDecimal result = apiRequest.apiRequest(currency);
+    public BigDecimal getExchangeRate(String currency) {
+        BigDecimal result = apiRequest.exchangeRateApiRequest(currency);
         log.info("got exchange rate " + currency + " " + result);
         return result;
-    }
-
-    @Override
-    public BigDecimal getRate(String currency) {
-        return null;
-    }
-
-    @Override
-    public void setCurrency(String currency) {
     }
 }

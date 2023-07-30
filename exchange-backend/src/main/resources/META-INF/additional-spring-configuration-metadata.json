@@ -25,10 +25,6 @@
       "description": "Cache table clear interval (default=179s)."
     },
     {
-      "name": "cache.clear-delay-in-seconds",
-      "description": "Cache table first clear delay (default=179s)."
-    },
-    {
       "name": "webapi.currency-info-url",
       "description": "URL of currency info API."
     },
@@ -67,7 +63,7 @@
           "description": "Constantly updates cache table entities."
         },
         {
-          "value": "purge",
+          "value": "clear",
           "description": "Clears cache table entities in time intervals (default)."
         }
       ]

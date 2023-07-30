@@ -21,25 +21,33 @@ public class CurrencyInfoService {
 
     private final Map<String, List<InfoResponseDto>> cache = new HashMap<>();
 
-    public InfoResponseDto getCurrencyInfo(InfoRequestDto code) {
+    public InfoResponseDto getCurrencyInfo(InfoRequestDto data) {
+        String code = data.getCode();
         Random random = new Random();
         List<InfoResponseDto> infoDtoList;
-        if (!cache.containsKey(code.getCode())){
-            infoDtoList = mapToResponse(apiRequest.currencyInfoApiRequest(code.getCode()), code.getCode());
-            cache.put(code.getCode(), infoDtoList);
+
+        if (!cache.containsKey(code)){
+            infoDtoList = mapToResponse(apiRequest.currencyInfoApiRequest(code), code);
+            cache.put(code, infoDtoList);
         }else {
-            infoDtoList = cache.get(code.getCode());
+            infoDtoList = cache.get(code);
         }
         int rnd = random.nextInt(infoDtoList.size());
         return infoDtoList.get(rnd);
     }
 
     private List<InfoResponseDto> mapToResponse(List<CurrencyInfoDto> data, String code) {
-        List<InfoResponseDto> responseDtos = new ArrayList<>();
+        List<InfoResponseDto> responses = new ArrayList<>();
         for (CurrencyInfoDto entity : data) {
-            responseDtos.add(new InfoResponseDto(entity, code));
+            InfoResponseDto temp = new InfoResponseDto();
+            temp.setCode(code);
+            temp.setName(entity.getName());
+            temp.setRegion(entity.getRegion());
+            temp.setSubregion(entity.getSubregion());
+            temp.setFlags(entity.getFlags());
+            responses.add(temp);
         }
-        return responseDtos;
+        return responses;
     }
 
     @Scheduled(fixedRateString = "${cache.clear-interval-in-seconds:179}", timeUnit = TimeUnit.SECONDS)
@@ -48,6 +56,6 @@ public class CurrencyInfoService {
             return;
         }
         cache.clear();
-        log.info("CACHE TABLE OF INFO CLEARED");
+        log.info("INFO CACHE TABLE CLEARED");
     }
 }

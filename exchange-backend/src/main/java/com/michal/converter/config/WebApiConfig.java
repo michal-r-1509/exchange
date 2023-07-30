@@ -15,5 +15,6 @@ public class WebApiConfig {
     private String currencyInfoUrl;
     @NotBlank
     private String currencyRequestUrl;
+    @NotBlank
     private String basicCurrency;
 }

@@ -1,9 +1,9 @@
 package com.michal.converter.config;
 
-import com.michal.converter.service.ConverterService;
-import com.michal.converter.service.NotUpdatedServiceImpl;
-import com.michal.converter.service.NotScheduledServiceImpl;
-import com.michal.converter.service.ScheduledServiceImpl;
+import com.michal.converter.service.*;
+import com.michal.converter.web_service.NotScheduledWebServiceImpl;
+import com.michal.converter.web_service.NotUpdatedWebServiceImpl;
+import com.michal.converter.web_service.ScheduledWebServiceImpl;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -24,28 +24,27 @@ public class CacheConfig {
     private TableClearing cacheTable;
     private int updateIntervalInSeconds;
     private int clearIntervalInSeconds;
-    private int clearDelayInSeconds;
 
     @Bean
     @ConditionalOnProperty(prefix = "cache", name = "scheduling-method", havingValue = "not_scheduled")
-    public ConverterService notScheduledService() {
+    public ConverterService notScheduledService(NotScheduledWebServiceImpl webService) {
         log.info("Application runs in NOT SCHEDULED mode");
-        return new NotScheduledServiceImpl();
+        return new ConverterServiceImpl(webService);
     }
 
     @Bean
     @ConditionalOnProperty(prefix = "cache", name = "scheduling-method",
             havingValue = "scheduled", matchIfMissing = true)
-    public ConverterService scheduledService() {
+    public ConverterService scheduledService(ScheduledWebServiceImpl webService) {
         log.info("Application runs in SCHEDULED (default) mode");
-        return new ScheduledServiceImpl();
+        return new ConverterServiceImpl(webService);
     }
 
     @Bean
     @ConditionalOnProperty(prefix = "cache", name = "scheduling-method", havingValue = "not_updated")
-    public ConverterService lastRateService() {
-        log.info("Application runs in LAST RATE mode");
-        return new NotUpdatedServiceImpl();
+    public ConverterService notUpdatedRateService(NotUpdatedWebServiceImpl webService) {
+        log.info("Application runs in NOT UPDATED RATE mode");
+        return new ConverterServiceImpl(webService);
     }
 
     public enum Scheduling {
@@ -56,6 +55,6 @@ public class CacheConfig {
 
     public enum TableClearing{
         UPDATE,
-        PURGE
+        CLEAR
     }
 }
