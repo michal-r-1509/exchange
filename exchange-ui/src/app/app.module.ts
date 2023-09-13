@@ -5,7 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MainComponent} from './pages/main/main.component';
-import {ApiUrl} from "./shared/apiUrl";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
@@ -27,7 +26,6 @@ import {InfoComponent} from './pages/info/info.component';
         ReactiveFormsModule,
         MatSelectModule
     ],
-  providers: [ApiUrl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

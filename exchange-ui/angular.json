@@ -70,7 +70,8 @@
               "browserTarget": "exchange-converter-ui:build:production"
             },
             "development": {
-              "browserTarget": "exchange-converter-ui:build:development"
+              "browserTarget": "exchange-converter-ui:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
